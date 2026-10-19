@@ -1,9 +1,15 @@
 // src/App.jsx
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { CartProvider } from './context/CartContext';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
+import { CartProvider } from './Context/CartContext';
+import Navbar from './Components/Navbar';
+import Home from './Pages/Home';
+import Carrito from './Pages/Carrito';
+import Registro from './Pages/Registro';
+import Login from './Pages/Login';
+import AdminProductos from './Pages/AdminProductos';
+import FormProducto from './Pages/FormProducto';
+
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(() => {
@@ -28,7 +34,15 @@ export default function App() {
         <Navbar currentUser={currentUser} onLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<Home />} />
-        </Routes>
+          <Route path = "/Home" element={<Home />} />
+          <Route path="/carrito" element={<Carrito />} />
+          <Route path="/registro" element={<Registro />} />
+          <Route path ="/login" element={<Login setCurrentUser={setCurrentUser} />} />   
+
+          <Route path="/admin" element={<AdminProductos />} />
+          <Route path="/admin/crear" element={<FormProducto />} />
+          <Route path="/admin/editar/:id" element={<FormProducto />} />     
+          </Routes>
       </div>
     </CartProvider>
   );

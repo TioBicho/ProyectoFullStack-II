@@ -1,9 +1,8 @@
 // src/pages/Home.jsx
-import { PRODUCTOS } from '../data/productos';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../Context/CartContext';
 
 export default function Home() {
-  const { agregarAlCarrito } = useCart();
+  const { productos, agregarAlCarrito } = useCart();
 
   const handleNewsletter = (e) => {
     e.preventDefault();
@@ -39,14 +38,14 @@ export default function Home() {
           </div>
 
           <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-            {PRODUCTOS.map((prod) => (
+            {productos.map((prod) => (
               <div className="col" key={prod.id}>
                 <article className="card h-100 p-3 card-gamer d-flex flex-column justify-content-between">
-                  <img
-                    src={prod.img}
-                    alt={prod.nombre}
-                    className="card-img-top rounded mb-3 foto-producto"
-                  />
+                    <img 
+                    className="foto-producto card-img-top rounded mb-3" 
+                    src={prod.img} 
+                    alt={prod.nombre} 
+                    />
                   <div>
                     <h3 className="h6 text-white mb-2">{prod.nombre}</h3>
                     <p className="fs-5 fw-bold text-info mb-3">
@@ -55,7 +54,7 @@ export default function Home() {
                   </div>
                   <button
                     type="button"
-                    onClick={() => agregarAlCarrito(prod.id)}
+                    onClick={() => agregarAlCarrito(prod)}
                     className="btn btn-outline-primary w-100 fw-bold"
                   >
                     <i className="bi bi-cart-plus me-1"></i> Agregar
