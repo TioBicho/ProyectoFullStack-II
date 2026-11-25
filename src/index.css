@@ -1,12 +1,96 @@
+/* ==========================================================
+   PALETA PREMIUM LEVEL-UP GAMER (REGLA 60-30-10)
+   Soporte completo para MODO OSCURO y MODO CLARO
+   ========================================================== */
 
-:root {
-  --bg-main: #000000;
-  --bg-card: #121318;
-  --neon-blue: #1e90ff;
-  --neon-green: #39ff14;
-  --text-main: #ffffff;
-  --text-muted: #a0a5b5;
-  --border-color: #262934;
+/* ----------------------------------------------------------
+   1. MODO OSCURO (Predeterminado)
+   • 60% Dominante: #0a0c10 (Obsidian Black)
+   • 30% Secundario: #121620 (Superficies, Cards, Headers, Bordes)
+   • 10% Acento:     #00f090 (Cyber Emerald / Electric Mint)
+   ---------------------------------------------------------- */
+:root, [data-theme="dark"] {
+  /* 60% DOMINANTE */
+  --color-dominant-bg: #0a0c10;
+  --color-dominant-surface: #0f121a;
+  --color-dominant-text: #f8fafc;
+  --color-dominant-muted: #94a3b8;
+
+  /* 30% SECUNDARIO */
+  --color-secondary-bg: #121620;
+  --color-secondary-surface: #181e2b;
+  --color-secondary-border: #222b3c;
+  --color-secondary-input: #121620;
+  --color-secondary-hover: #1c2333;
+
+  /* 10% ACENTO */
+  --color-accent: #00f090;
+  --color-accent-hover: #00d27d;
+  --color-accent-text: #04140d;
+  --color-accent-glow: rgba(0, 240, 144, 0.22);
+  --color-accent-secondary: #00d5ff;
+  --color-accent-warning: #f59e0b;
+  --color-accent-danger: #ef4444;
+
+  /* Sombras y fondos contextuales */
+  --header-bg: rgba(15, 18, 26, 0.94);
+  --card-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --dropdown-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  --zoom-bg: rgba(0, 0, 0, 0.2);
+
+  /* Compatibilidad con variables previas */
+  --bg-main: var(--color-dominant-bg);
+  --bg-card: var(--color-secondary-bg);
+  --neon-blue: var(--color-accent-secondary);
+  --neon-green: var(--color-accent);
+  --text-main: var(--color-dominant-text);
+  --text-muted: var(--color-dominant-muted);
+  --border-color: var(--color-secondary-border);
+}
+
+/* ----------------------------------------------------------
+   2. MODO CLARO
+   • 60% Dominante: #f5f7fb (Titanium White / Slate suave)
+   • 30% Secundario: #ffffff (Tarjetas, Navbars, Paneles, Bordes claros)
+   • 10% Acento:     #059669 (Esmeralda oscuro / Contraste optimizado)
+   ---------------------------------------------------------- */
+[data-theme="light"] {
+  /* 60% DOMINANTE */
+  --color-dominant-bg: #f5f7fb;
+  --color-dominant-surface: #ffffff;
+  --color-dominant-text: #0f172a;
+  --color-dominant-muted: #64748b;
+
+  /* 30% SECUNDARIO */
+  --color-secondary-bg: #ffffff;
+  --color-secondary-surface: #f8fafc;
+  --color-secondary-border: #e2e8f0;
+  --color-secondary-input: #ffffff;
+  --color-secondary-hover: #f1f5f9;
+
+  /* 10% ACENTO */
+  --color-accent: #059669;
+  --color-accent-hover: #047857;
+  --color-accent-text: #ffffff;
+  --color-accent-glow: rgba(5, 150, 105, 0.25);
+  --color-accent-secondary: #0284c7;
+  --color-accent-warning: #d97706;
+  --color-accent-danger: #dc2626;
+
+  /* Sombras y fondos contextuales */
+  --header-bg: rgba(255, 255, 255, 0.94);
+  --card-shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
+  --dropdown-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+  --zoom-bg: #f8fafc;
+
+  /* Compatibilidad con variables previas */
+  --bg-main: var(--color-dominant-bg);
+  --bg-card: var(--color-secondary-bg);
+  --neon-blue: var(--color-accent-secondary);
+  --neon-green: var(--color-accent);
+  --text-main: var(--color-dominant-text);
+  --text-muted: var(--color-dominant-muted);
+  --border-color: var(--color-secondary-border);
 }
 
 * {
@@ -15,89 +99,271 @@
   padding: 0;
 }
 
-/* Forzar fondo oscuro en toda la pagina */
+/* 60% Dominante: Fondo y tipografía base */
 html, body {
-  background-color: var(--bg-main) !important;
-  color: var(--text-main) !important;
-  font-family: 'Arial', sans-serif;
+  background-color: var(--color-dominant-bg) !important;
+  color: var(--color-dominant-text) !important;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-h1, h2, h3, h4, .brand-font {
-  font-family: 'Arial', sans-serif;
-  color: var(--text-main) !important;
+h1, h2, h3, h4, h5, h6, .brand-font {
+  color: var(--color-dominant-text) !important;
+  letter-spacing: -0.015em;
 }
 
-/* Header superior */
+/* Adaptación inteligente de clases utilitarias para modo claro */
+[data-theme="light"] .text-white:not(.btn *):not(.badge *):not(.btn-add-cart *):not(.btn-primary *) {
+  color: var(--color-dominant-text) !important;
+}
+
+[data-theme="light"] .text-secondary {
+  color: var(--color-dominant-muted) !important;
+}
+
+/* 30% Secundario: Header y Navbar Compacto */
 header.top-header {
-  background-color: #0d0e12 !important;
-  border-bottom: 2px solid var(--neon-blue);
+  background-color: var(--header-bg) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-secondary-border) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
-.sub-header {
-  background-color: #050507;
-  border-bottom: 1px solid var(--border-color);
-}
-
-/* Enlaces del menu */
-.nav-link {
-  color: var(--text-main) !important;
+/* Estilo unificado para botones/enlaces de navegación a la derecha */
+.nav-action-btn {
+  background-color: transparent;
+  color: var(--color-dominant-text) !important;
+  border: 1px solid var(--color-secondary-border);
+  padding: 0.35rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
   font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.nav-link:hover {
-  color: var(--neon-green) !important;
-}
-
-/* Boton de Carrito del header */
-.btn-cart-header {
-  background-color: transparent !important;
-  color: var(--text-main) !important;
-  border: 1px solid var(--neon-blue) !important;
-  padding: 0.4rem 0.9rem;
-  border-radius: 6px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
-.btn-cart-header:hover {
-  background-color: var(--neon-blue) !important;
+.nav-action-btn:hover {
+  background-color: var(--color-secondary-hover);
+  border-color: var(--color-accent);
+  color: var(--color-accent) !important;
+}
+
+.nav-action-btn.active {
+  background-color: var(--color-secondary-surface);
+  border-color: var(--color-accent);
+  color: var(--color-accent) !important;
+}
+
+/* Barra de búsqueda central continua y adaptativa */
+.navbar-search-wrapper {
+  background-color: var(--color-secondary-bg) !important;
+  border: 1px solid var(--color-secondary-border) !important;
+  border-radius: 20px;
+  padding: 0.25rem 0.75rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-search-wrapper:focus-within {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 2px var(--color-accent-glow) !important;
+}
+
+.navbar-search-input {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--color-dominant-text) !important;
+  font-size: 0.875rem;
+  padding: 0.2rem 0.5rem;
+  width: 100%;
+  outline: none !important;
+}
+
+.navbar-search-input::placeholder {
+  color: var(--color-dominant-muted) !important;
+  opacity: 0.75;
+}
+
+.navbar-search-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: var(--color-dominant-text) !important;
+}
+
+/* 30% Secundario: Cards de Productos */
+.card-gamer, .card-product-premium {
+  background-color: var(--color-secondary-bg) !important;
+  border: 1px solid var(--color-secondary-border) !important;
+  border-radius: 12px;
+  color: var(--color-dominant-text) !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--card-shadow);
+}
+
+.card-gamer:hover, .card-product-premium:hover {
+  border-color: var(--color-accent) !important;
+  box-shadow: var(--card-shadow);
+  transform: none !important;
+}
+
+.card-img-zoom-wrapper {
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: var(--zoom-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  transition: background-color 0.25s ease;
+}
+
+.card-img-zoom-wrapper img {
+  transition: transform 0.3s ease;
+}
+
+.card-product-premium:hover .card-img-zoom-wrapper img {
+  transform: scale(1.04);
+}
+
+/* 10% Acento: Botón Agregar al carrito */
+.btn-add-cart {
+  background-color: var(--color-accent) !important;
+  border: 1px solid var(--color-accent) !important;
+  color: var(--color-accent-text) !important;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.btn-add-cart:hover {
+  background-color: #0f172a !important;
+  border-color: #0f172a !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 14px var(--color-accent-glow);
+}
+
+[data-theme="dark"] .btn-add-cart:hover {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
   color: #000000 !important;
 }
 
-/* Tarjetas */
-.card-gamer {
-  background-color: var(--bg-card) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 8px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+/* Botones y Badges generales */
+.btn-accent, .btn-primary {
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-accent-text) !important;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-.card-gamer:hover {
-  border-color: var(--neon-blue) !important;
-  transform: translateY(-4px);
+.btn-accent:hover, .btn-primary:hover {
+  background-color: var(--color-accent-hover) !important;
+  border-color: var(--color-accent-hover) !important;
+  color: var(--color-accent-text) !important;
+}
+
+.btn-outline-primary {
+  color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  background-color: transparent !important;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--color-accent) !important;
+  color: var(--color-accent-text) !important;
+}
+
+.badge-accent, .badge.bg-accent {
+  background-color: var(--color-accent) !important;
+  color: var(--color-accent-text) !important;
+  font-weight: 700;
+}
+
+/* Formularios e inputs */
+.form-control, .form-select {
+  background-color: var(--color-secondary-input) !important;
+  border: 1px solid var(--color-secondary-border) !important;
+  color: var(--color-dominant-text) !important;
+  border-radius: 8px;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: var(--color-secondary-input) !important;
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 0.2rem var(--color-accent-glow) !important;
+  color: var(--color-dominant-text) !important;
+}
+
+.form-control::placeholder {
+  color: var(--color-dominant-muted) !important;
+  opacity: 0.7;
+}
+
+/* Tablas */
+[data-theme="light"] .table-dark {
+  --bs-table-bg: var(--color-secondary-bg) !important;
+  --bs-table-striped-bg: var(--color-secondary-surface) !important;
+  --bs-table-border-color: var(--color-secondary-border) !important;
+  --bs-table-color: var(--color-dominant-text) !important;
+}
+
+/* Menús Desplegables */
+.dropdown-menu-dark-custom {
+  background-color: var(--color-secondary-bg) !important;
+  border: 1px solid var(--color-secondary-border) !important;
+  border-radius: 10px;
+  box-shadow: var(--dropdown-shadow) !important;
+  color: var(--color-dominant-text) !important;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.dropdown-item-custom {
+  color: var(--color-dominant-text) !important;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+.dropdown-item-custom:hover {
+  background-color: var(--color-secondary-hover) !important;
+  color: var(--color-accent) !important;
 }
 
 /* Footer */
 footer {
-  background-color: #050507 !important;
-  border-top: 1px solid var(--border-color);
-}
-
-/* Media Query Responsive para celulares */
-@media (max-width: 768px) {
-  .hero-section {
-    text-align: center;
-  }
+  background-color: var(--color-dominant-surface) !important;
+  border-top: 1px solid var(--color-secondary-border) !important;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 /* Ajustes de imágenes */
 .foto-producto {
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  max-width: 220px;
+  height: 180px;
   object-fit: contain;
+  margin: 0 auto;
 }
